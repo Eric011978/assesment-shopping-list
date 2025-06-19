@@ -30,7 +30,7 @@ class Item extends Model
 
     public function update($id, $name, $user, $checked): bool
     {
-        $stmt = $this->db->prepare('UPDATE items SET name = :name, user = :user checked = :checked WHERE id = :id');
+        $stmt = $this->db->prepare('UPDATE items SET name = :name, user = :user, checked = :checked WHERE id = :id');
         return $stmt->execute(['name' => $name, 'user' => $user, 'checked' => $checked, 'id' => $id]);
     }
 
