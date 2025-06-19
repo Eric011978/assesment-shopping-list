@@ -22,16 +22,16 @@ class Item extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function create($name): bool
+    public function create($name, $user): bool
     {
         $stmt = $this->db->prepare('INSERT INTO items(name, user) VALUES(:name, :user)');
-        return $stmt->execute(['name' => $name]);
+        return $stmt->execute(['name' => $name, 'user' => $user]);
     }
 
-    public function update($id, $name, $checked): bool
+    public function update($id, $name, $user, $checked): bool
     {
         $stmt = $this->db->prepare('UPDATE items SET name = :name, user = :user checked = :checked WHERE id = :id');
-        return $stmt->execute(['name' => $name, 'checked' => $checked, 'id' => $id]);
+        return $stmt->execute(['name' => $name, 'user' => $user, 'checked' => $checked, 'id' => $id]);
     }
 
     public function delete($id): bool

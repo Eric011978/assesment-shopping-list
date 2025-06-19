@@ -18,8 +18,9 @@ class ItemController
     public function create(): void
     {
         $name = $_POST['name'] ?? '';
+        $user = $_POST['user'] ?? '';
         if ($name) {
-            (new Item())->create($name);
+            (new Item())->create($name, $user);
         }
         Redirect::to('/');
     }
@@ -33,9 +34,10 @@ class ItemController
     public function update($id): void
     {
         $name = $_POST['name'] ?? '';
+        $user = $_POST['user'] ?? '';
         $checked = isset($_POST['checked']) ? 1 : 0;
         if ($name) {
-            (new Item())->update($id, $name, $checked);
+            (new Item())->update($id, $user, $checked);
         }
         Redirect::to('/');
     }
