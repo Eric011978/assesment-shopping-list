@@ -37,7 +37,7 @@ class ItemController
         $user = $_POST['user'] ?? '';
         $checked = isset($_POST['checked']) ? 1 : 0;
         if ($name) {
-            (new Item())->update($id, $user, $checked);
+            (new Item())->update($id, $name, $user, $checked);
         }
         Redirect::to('/');
     }
