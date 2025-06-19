@@ -24,7 +24,7 @@ class Item extends Model
 
     public function create($name, $userId): bool
     {
-        $stmt = $this->db->prepare('INSERT INTO items(name, userId) VALUES(:name, :user_id)');
+        $stmt = $this->db->prepare('INSERT INTO items(name, user_id) VALUES(:name, :user_id)');
         return $stmt->execute(['name' => $name, 'user_id' => $userId]);
     }
 
