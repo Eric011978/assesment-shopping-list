@@ -7,7 +7,11 @@
     <h1>Shopping List</h1>
     <form method="post" action="/create">
         <input type="text" name="name" placeholder="New item" required>
-        <input type="text" name="user" placeholder="User" required>
+        <select name="user_id">
+            <?php foreach ($users as $user): ?>
+                <option value="<?php echo $user['id'] ?>"><?php echo $user['name'] ?></option>
+            <?php endforeach ?>
+        </select>
         <button type="submit">Add</button>
     </form>
     <ul>
@@ -15,7 +19,11 @@
             <li>
                 <form method="post" action="/update/<?php echo $item['id']; ?>">
                     <input type="text" name="name" value="<?php echo htmlspecialchars($item['name']); ?>">
-                    <input placeholder="User" type="text" name="user" value="<?php echo htmlspecialchars($item['user']); ?>">
+                    <select name="user_id">
+                        <?php foreach ($users as $user): ?>
+                            <option <?php echo $item['user_id'] === $user['id'] ? 'selected=selected' : '' ?> value="<?php echo $user['id'] ?>"><?php echo $user['name'] ?></option>
+                        <?php endforeach ?>
+                    </select>
                     <input type="checkbox" name="checked" <?php echo $item['checked'] ? 'checked' : ''; ?>>
                     <button type="submit">Save</button>
                 </form>

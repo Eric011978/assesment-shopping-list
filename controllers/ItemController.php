@@ -5,22 +5,23 @@ namespace App\Controllers;
 use App\Models\Item;
 use App\Core\View;
 use App\Core\Redirect;
+use App\Models\User;
 
 class ItemController
 {
-
     public function index(): void
     {
         $items = (new Item())->all();
-        View::render('index', ['items' => $items]);
+        $users = (new User())->all();
+        View::render('index', ['items' => $items, 'users' => $users]);
     }
 
     public function create(): void
     {
         $name = $_POST['name'] ?? '';
-        $user = $_POST['user'] ?? '';
+        $userId = (int) $_POST['user_id'] ?? '';
         if ($name) {
-            (new Item())->create($name, $user);
+            (new Item())->create($name, $userId);
         }
         Redirect::to('/');
     }
@@ -34,10 +35,10 @@ class ItemController
     public function update($id): void
     {
         $name = $_POST['name'] ?? '';
-        $user = $_POST['user'] ?? '';
+        $userId = (int)$_POST['user_id'] ?? '';
         $checked = isset($_POST['checked']) ? 1 : 0;
         if ($name) {
-            (new Item())->update($id, $name, $user, $checked);
+            (new Item())->update($id, $name, $userId, $checked);
         }
         Redirect::to('/');
     }
